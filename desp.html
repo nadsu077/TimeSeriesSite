@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>desp.knit</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Séries Temporais na Saúde Suplementar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Início</a>
+</li>
+<li>
+  <a href="desp.html">Despesas </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="procedimentos-ambulatoriais" class="section level2">
+<h2>Procedimentos Ambulatoriais</h2>
+<p>Procedimentos (ou atendimentos) ambulatoriais são aqueles voltados
+para a realização de curativos, pequenas cirurgias, pestação de
+primeiros socorros e demais meios de prestação de serviços a saúde que
+dispensam estruturas e recursos de maior complexidade para sua
+execução.</p>
+<p>Exemplos de especialidades encontradas no ambulatório médico:</p>
+<ul>
+<li><p>Clínica geral</p></li>
+<li><p>Pediatria</p></li>
+<li><p>Ortopedia</p></li>
+<li><p>Ginecologia</p></li>
+</ul>
+<p>Exemplos de atendimentos encontrados no ambulatório médico:</p>
+<ul>
+<li><p>Curativos ou suturas</p></li>
+<li><p>Retirada de pontos</p></li>
+<li><p>Punção ou infiltração</p></li>
+</ul>
+<p>Também é possível realizar exames clínicos e de imagem, como:</p>
+<ul>
+<li><p>Radiografias</p></li>
+<li><p>Tomografias</p></li>
+<li><p>Ultrassonografias</p></li>
+<li><p>Exames laboratoriais</p></li>
+</ul>
+</div>
+<div id="procedimentos-hospitalares" class="section level2">
+<h2>Procedimentos Hospitalares</h2>
+<p>São aqueles que necessitem de ambiente hospitalar para sua
+realização, precisando então de equipamentos e serviços de maior
+complexidade, para efetuar cirurgias mais invasivas ou para internação
+de um paciente.</p>
+<p>As especialidades encontradas no ambiente hospitalar pode ser das
+mais variadas, pois é necessário que se tenham médicos especialistas
+disponíveis para determinadas operações, desde cirurgias ortopédicas até
+as mais invasivas como transplante de órgãos.</p>
+<p>Explicado o que são os atendimentos ambulatoriais e hospitalares,
+vamos a leitura dos dados. A série utilizada pode ser encontrada em <a
+href="http://ftp.dadosabertos.ans.gov.br/FTP/PDA/TISS/AMBULATORIAL/"
+class="uri">http://ftp.dadosabertos.ans.gov.br/FTP/PDA/TISS/AMBULATORIAL/</a>
+para a série ambulatorial e em <a
+href="http://ftp.dadosabertos.ans.gov.br/FTP/PDA/TISS/HOSPITALAR/"
+class="uri">http://ftp.dadosabertos.ans.gov.br/FTP/PDA/TISS/HOSPITALAR/</a>
+para a série hospitalar, no entanto será utilizado os dados já tratados
+e agregados mensalmente, para fins de facilitar o trabalho.</p>
+<pre class="r"><code># Importando os dados do GitHub, coluna &quot;comp&quot; refere-se a competência e &quot;valor&quot; ao valor total observado na competência.
+
+# Ambulatorial
+amb = read.csv(&quot;https://raw.githubusercontent.com/nadsu077/TimeSeriesData/main/ambulatorial_CE.csv&quot;, header = T)
+
+# Hospitalar
+hosp = read.csv(&quot;https://raw.githubusercontent.com/nadsu077/TimeSeriesData/main/hospitalar_CE.csv&quot;, header = T)
+
+# Série temporal ambulatorial
+amb.ts = ts(amb[,&#39;valor&#39;], # Especificando os dados que serão convertidos em série temporal
+            start = c(2015, 1), # Competência inicial, 2015-01
+            end = c(2020,12), # Competência final, 2020-12
+            frequency = 12) # Frequência da série (1 - Anual, 2 - Semestral, 4 - Trimestral, 12 - Mensal)
+
+# Série temporal hospitalar
+hosp.ts = ts(hosp[,&#39;valor&#39;], # Especificando os dados que serão convertidos em série temporal
+            start = c(2015, 1), # Competência inicial, 2015-01
+            end = c(2020,12), # Competência final, 2020-12
+            frequency = 12) # Frequência da série (1 - Anual, 2 - Semestral, 4 - Trimestral, 12 - Mensal)</code></pre>
+<p>Após importar os dados e tranformá-lo em um objeto do tipo <em>time
+series</em>, é interessante gerar gráficos iniciais para visualização
+dos dados e buscar primeiras interpretações da série.</p>
+<div id="gráfico-das-séries-ao-mês" class="section level3">
+<h3><strong>Gráfico das séries ao mês</strong></h3>
+<pre class="r"><code># Série ambulatorial mensal
+ts.plot(amb.ts, main = &quot;Série Ambulatorial&quot;)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code># Série hospitalar mensal
+ts.plot(hosp.ts, main = &quot;Série Hospitalar&quot;)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p>Inicialmente pode-se ter a interpretação que os valores das despesas
+crescem conforme o tempo, ou seja, apresentam tendência positiva. Por
+volta do mês de abril de 2020 pode ser observado o efeito da pandemia e
+da suspensão do atendimento presencial obrigatório emitido pela ANS.</p>
+</div>
+<div id="gráfico-das-séries-agregadas-anualmente"
+class="section level3">
+<h3><strong>Gráfico das séries agregadas anualmente</strong></h3>
+<pre class="r"><code># Série ambulatorial anual
+plot(aggregate(amb.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code># Série hospitalar anual
+plot(aggregate(hosp.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<p>Agregando os valores anualmente fica mais evidente a tendência
+positiva da série, ocasionando no aumento nas despesas ambulatoriais
+conforme os anos passam. A série ambulatorial apresenta tendência linear
+positiva, enquanto a série hospitalar apresenta tendência positiva,
+porém com concavidade no ano de 2017. O ano de 2020 apresenta queda por
+ter sido o ano afetado pela pandemia da COVID-19</p>
+</div>
+<div id="boxplot-dos-valores-mensalmente" class="section level3">
+<h3><strong>Boxplot dos valores mensalmente</strong></h3>
+<pre class="r"><code># Box-plot dos meses da série ambulatorial
+boxplot(amb.ts ~ cycle(amb.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code># Box-plot dos meses da série hospitalar
+boxplot(hosp.ts ~ cycle(hosp.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p>A análise visual do boxplot dos valores pelos meses de janeiro (1) a
+dezembro (12) mostram que não há sazonalidade definida nas séries
+observadas, para confirmar se há presença de sazonalidade será feito
+teste de verificação mais afrente.</p>
+</div>
+<div id="decomposição-das-séries" class="section level3">
+<h3><strong>Decomposição das séries</strong></h3>
+<pre class="r"><code># Decomposição da série ambulatorial
+plot(decompose(amb.ts, type = &quot;additive&quot;))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code># Decomposição da série hospitalar
+plot(decompose(hosp.ts, type = &quot;additive&quot;))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p>A decomposição da série pode ser efeita utilizando dois modelos, o
+modelo <strong>aditivo</strong> ou o modelo
+<strong>multiplicativo</strong>.</p>
+<p>O modelo aditivo é dado por: <span class="math inline">\(Y[t] = T[t]
++ S[t] + e[t]\)</span></p>
+<p>Já o modelo multiplicativo é dado por: <span
+class="math inline">\(Y[t] = T[t] * S[t] * e[t]\)</span></p>
+<p>Onde:</p>
+<ul>
+<li><p>T[t] = Tendência</p></li>
+<li><p>S[t] = Sazonalidade</p></li>
+<li><p>e[t] = Termo aleatório ou ruído branco</p></li>
+</ul>
+<p>Para saber qual modelo utilizar é simples, basta olhar para a própria
+série. Se, conforme o tempo passa, a variabilidade aumenta, ou seja, os
+valores extremos se distanciam cada vez mais, a série segue o modelo
+multiplicativo. No caso analisado da despesa ambulatorial e hospitalar a
+variabilidade dos dados não aumenta com o tempo, sendo então cabível
+utilizar o modelo aditivo para ambas as séries.</p>
+<p>Na decomposição é gerado 4 gráficos, contendo a série observada
+(<em>observed</em>), a tendência (<em>trend</em>), a sazonalidade
+(<em>seasonal</em>) e o termo aleatório ou ruído branco
+(<em>random</em>). Conforme já foi dito acima a série apresenta
+tendência positiva, podendo ser interpretada como tendência linear
+positiva para a série ambulatorial, pois chega a se assemelhar com uma
+reta, já a série hospitalar apresenta de fato tendência positiva com
+certa concavidade, porém no ano de 2020 é percebido que a tendência
+decai para ambas as séries, efeito gerado pela pandemia da COVID-19.</p>
+</div>
+<div id="retirando-o-termo-aleatório" class="section level3">
+<h3><strong>Retirando o termo aleatório</strong></h3>
+<p>O intuito é ter a visualização da tendência em conjunto com a
+tendência somada com a sazonalidade, retirado o termo aleatório (ruído
+branco).</p>
+<ul>
+<li><h4 id="série-ambulatorial"><strong>Série
+Ambulatorial</strong></h4></li>
+</ul>
+<pre class="r"><code># Série Ambulatorial
+decom.a = decompose(amb.ts)
+
+trend.a = decom.a$trend
+season.a = decom.a$seasonal
+
+ts.plot(cbind(trend.a, trend.a+season.a), lty = 1:2)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>A série ambulatorial de fato apresenta nitidez na linearidade da
+tendência positiva, apresentando queda no ano de 2020.</p>
+<ul>
+<li><h4 id="série-hospitalar"><strong>Série
+Hospitalar</strong></h4></li>
+</ul>
+<pre class="r"><code># Série Hospitalar
+decom.h = decompose(hosp.ts)
+
+trend.h = decom.h$trend
+season.h = decom.h$seasonal
+
+ts.plot(cbind(trend.h, trend.h+season.h), lty = 1:2)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>A série hospitalar, como já comentado, apresenta certa concavidade,
+onde pode ser observada entre os anos de 2017 a 2019.</p>
+</div>
+</div>
+<div id="analisando-a-componente-sazonal-das-séries"
+class="section level2">
+<h2><strong>Analisando a componente sazonal das séries</strong></h2>
+<ul>
+<li><h3 id="utilizando-o-método-dummies"><strong>Utilizando o método
+dummies</strong></h3></li>
+</ul>
+<p>O método foi encontrado no seguinte material: <a
+href="https://analisemacro.com.br/wp-content/uploads/2015/02/CursoCompleto.pdf"
+class="uri">https://analisemacro.com.br/wp-content/uploads/2015/02/CursoCompleto.pdf</a></p>
+<p>O método dummies tempo como hipótese nula e alternativa,
+respectivamente:</p>
+<p><span class="math inline">\(H_0: \text{Não existe sazonalidade }
+(\beta_2 = \beta_3 = \beta_4 = ... = \beta_i = 0)\)</span></p>
+<p><span class="math inline">\(H_1: \text{Há indícios de sazonalidade }
+(\beta_2 \neq \beta_3 \neq \beta_4 \neq ... \neq \beta_i \neq
+0)\)</span></p>
+<ul>
+<li><h4 id="série-ambulatorial-1"><strong>Série
+Ambulatorial</strong></h4></li>
+</ul>
+<pre class="r"><code>Q = ordered(cycle(amb.ts)) # Ordenando os meses da série
+
+amb.reg = lm(amb.ts ~ Q) # Regressão linear da série pelos meses da série
+
+summary(amb.reg) # Resumo estatístico do resultado da regressão</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = amb.ts ~ Q)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -61771591 -30079200   3985645  26801866  64579820 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 151250215    4509635  33.539   &lt;2e-16 ***
+## Q.L          14329711   15621834   0.917    0.363    
+## Q.Q          -4025088   15621834  -0.258    0.798    
+## Q.C         -24033046   15621834  -1.538    0.129    
+## Q^4          -5752315   15621834  -0.368    0.714    
+## Q^5          -2461506   15621834  -0.158    0.875    
+## Q^6           2923438   15621834   0.187    0.852    
+## Q^7          -8562874   15621834  -0.548    0.586    
+## Q^8           2369392   15621834   0.152    0.880    
+## Q^9           3688281   15621834   0.236    0.814    
+## Q^10          8030419   15621834   0.514    0.609    
+## Q^11         -4438724   15621834  -0.284    0.777    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 38270000 on 60 degrees of freedom
+## Multiple R-squared:  0.06534,    Adjusted R-squared:  -0.106 
+## F-statistic: 0.3813 on 11 and 60 DF,  p-value: 0.9585</code></pre>
+<ul>
+<li><h4 id="série-hospitalar-1"><strong>Série
+Hospitalar</strong></h4></li>
+</ul>
+<pre class="r"><code>Q = ordered(cycle(hosp.ts)) # Ordenando os meses da série
+
+hosp.reg = lm(hosp.ts ~ Q) # Regressão linear da série pelos meses da série
+
+summary(hosp.reg) # Resumo estatístico do resultado da regressão</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = hosp.ts ~ Q)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -27986066 -16506890   4571563  10071676  32359640 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 84596960    2021399  41.851   &lt;2e-16 ***
+## Q.L           157088    7002330   0.022    0.982    
+## Q.Q         -7919754    7002330  -1.131    0.263    
+## Q.C           114214    7002330   0.016    0.987    
+## Q^4           -92001    7002330  -0.013    0.990    
+## Q^5         -6507496    7002330  -0.929    0.356    
+## Q^6          1828863    7002330   0.261    0.795    
+## Q^7         -3124285    7002330  -0.446    0.657    
+## Q^8          4321599    7002330   0.617    0.539    
+## Q^9           588428    7002330   0.084    0.933    
+## Q^10         6041462    7002330   0.863    0.392    
+## Q^11        -4146455    7002330  -0.592    0.556    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 17150000 on 60 degrees of freedom
+## Multiple R-squared:  0.06095,    Adjusted R-squared:  -0.1112 
+## F-statistic: 0.354 on 11 and 60 DF,  p-value: 0.9684</code></pre>
+<p>Os coeficientes da regressão foram não significativos (p &gt; 0.05),
+enquanto o intercepto foi significativo (p &lt; 0.05), para ambas as
+séries. Pelo método dummies não rejeita-se H0: Não existe sazonalidade
+(ß2 = ß3 = ß4 = … = ßi = 0), pois o p-valor foi de 0.9585 (série
+ambulatorial) e de 0.9684 (série hospitalar), já o valor da estatística
+F igual a 0.3813 (série ambulatorial) e 0.354 (série hospitalar),
+apresentando não rejeição para a hipótese nula do modelo gerado. No
+entanto, para que tenha-se maior confirmação da não presença da
+sazonalidade pode ser utilizado métodos de análise visual (gráfica) como
+boxplot dos meses (gerado e analisado mais acima), subséries sazonais e
+run sequence.</p>
+<ul>
+<li><h4 id="série-ambulatorial-2"><strong>Série
+Ambulatorial</strong></h4></li>
+</ul>
+<pre class="r"><code># Subséries sazonais ambulatorial
+monthplot(amb.ts)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code># Run Sequence ambulatorial
+qicharts::qic(amb.ts) # Pacote: https://cran.r-project.org/web/packages/qicharts/vignettes/runcharts.html</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<p>Os gráficos de subséries sazonais e run sequences para a série
+ambulatorial não retornam sazonalidade bem definida, reforçando o
+resultado obtido pelo métodos dummies para a série analisada.</p>
+<ul>
+<li><h4 id="série-hospitalar-2"><strong>Série
+Hospitalar</strong></h4></li>
+</ul>
+<pre class="r"><code># Subséries sazonais hospitalar
+monthplot(hosp.ts)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code># Run Sequence hospitalar
+qicharts::qic(hosp.ts) # Pacote: https://cran.r-project.org/web/packages/qicharts/vignettes/runcharts.html</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<p>Para a série hospitalar também foi obtido o resultado de sazonalidade
+não definida, com o resultado gráfico confirmando a regressão dummies
+feita anteriormente.</p>
+</div>
+<div id="testes-de-quebra-estrutural" class="section level2">
+<h2><strong>Testes de quebra estrutural</strong></h2>
+<p>Entende-se por quebra estrutural de uma série temporal o momento
+dentro das sequências de registros que mudam a dinâmica da série ou uma,
+ou mais, observações que estejam fora do que foi observado antes.</p>
+<ul>
+<li>Tipos de Testes de quebra estrutural:</li>
+</ul>
+<p>SUP-Wald, OLS-CUSUM, OLS-MOSUM, Bai-Perron</p>
+<p>Será utilizado mais de um tipo de teste para que seja validado a
+presença de quebra estrutural nas séries. O resultado esperado é que
+seja apontado quebra existente em meados do mês de Abril de 2020.</p>
+<ul>
+<li><h4 id="série-ambulatorial-3"><strong>Série
+Ambulatorial</strong></h4></li>
+</ul>
+<pre class="r"><code>time = c(1:length(amb.ts))
+
+amb_BP = strucchange::breakpoints(amb.ts ~ time, h = 0.1, breaks = 5)
+
+plot(amb_BP)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Utilizando a função <em>breakpoints</em> do pacote
+<em>strucchange</em> para o teste pelo método Bai-Perron para observação
+das possíveis quebras na série. Observando o gráfico da identificação de
+quantas quebras existem na série pelas méticas BIC e a Soma dos
+quadrados dos resíduos (RSS). Pelo BIC, métrica aconselhável pela
+documentação do teste, foi obtido a quantidade de duas quebras
+estruturais.</p>
+<pre class="r"><code># Resultado
+amb_BP</code></pre>
+<pre><code>## 
+##   Optimal 3-segment partition: 
+## 
+## Call:
+## breakpoints.formula(formula = amb.ts ~ time, h = 0.1, breaks = 5)
+## 
+## Breakpoints at observation number:
+## 54 63 
+## 
+## Corresponding to breakdates:
+## 2019(6) 2020(3)</code></pre>
+<p>O resultado de quais foram as duas quebras identificadas na série
+pode ser obtida chamando o objeto <em>amb_BP</em> onde as quebras foram
+nos meses de Junho de 2019 e Março de 2020.</p>
+<pre class="r"><code># OLS-CUSUM
+amb_cusum = strucchange::efp(amb.ts ~ time, type = &quot;OLS-CUSUM&quot;, h = 0.1)
+
+# OLS-MOSUM
+amb_mosum = strucchange::efp(amb.ts ~ time, type = &quot;OLS-MOSUM&quot;, h = 0.1)
+
+# Plot OLS-CUSUM
+plot(amb_cusum)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code># Plot OLS-MOSUM
+plot(amb_mosum)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<p>Pelo teste de OLS-CUSUM foi observado meses entre o fim de 2019 e
+meados do início de 2020 fora do intervalo de confiança. Já pelo método
+OLS-MOSUM os meses fora do intervalo de confiança foram por volta do
+meio de 2019, porém essa observação pode ser desconsiderada por
+apresentar distância ínfima entre o intervalo, já a outra observação de
+quebra foi obtida por volta do início de 2020, com seu menor valor por
+volta de Abril do ano.</p>
+<p>Dessa forma, será considerada apenas a quebra estrutural no ano de
+2020, já que foi a percebida e confirmada dentro dos três testes
+realizados.</p>
+<ul>
+<li><h4 id="série-hospitalar-3"><strong>Série
+Hospitalar</strong></h4></li>
+</ul>
+<pre class="r"><code>time = c(1:length(hosp.ts))
+
+hosp_BP = strucchange::breakpoints(hosp.ts ~ time, h = 0.1, breaks = 5)
+
+plot(hosp_BP)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Utilizando a função <em>breakpoints</em> do pacote
+<em>strucchange</em> para o teste pelo método Bai-Perron para observação
+das possíveis quebras na série. Observando o gráfico da identificação de
+quantas quebras existem na série pelas méticas BIC e a Soma dos
+quadrados dos resíduos (RSS). Pelo BIC, métrica aconselhável pela
+documentação do teste, foi obtido a quantidade de três quebras
+estruturais.</p>
+<pre class="r"><code># Resultado
+hosp_BP</code></pre>
+<pre><code>## 
+##   Optimal 4-segment partition: 
+## 
+## Call:
+## breakpoints.formula(formula = hosp.ts ~ time, h = 0.1, breaks = 5)
+## 
+## Breakpoints at observation number:
+## 24 51 64 
+## 
+## Corresponding to breakdates:
+## 2016(12) 2019(3) 2020(4)</code></pre>
+<p>O resultado de quais foram as três quebras identificadas na série
+pode ser obtida chamando o objeto <em>amb_BP</em>, onde as quebras foram
+nos meses de Dezembro de 2016 e Março de 2019 e Abril de 2020.</p>
+<pre class="r"><code># OLS-CUSUM
+hosp_cusum = strucchange::efp(hosp.ts ~ time, type = &quot;OLS-CUSUM&quot;, h = 0.1)
+
+# OLS-MOSUM
+hosp_mosum = strucchange::efp(hosp.ts ~ time, type = &quot;OLS-MOSUM&quot;, h = 0.1)
+
+# Plot OLS-CUSUM
+plot(hosp_cusum)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<pre class="r"><code># Plot OLS-MOSUM
+plot(hosp_mosum)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
+<p>Pelo método OLS-CUSUM foi obtido resultado fora do intervalo de
+confiança no final do ano de 2016, porém a distância é pequena e pode
+ser desconsiderada, já a sergunda observação foi entre o final 2019 e
+início de 2020. Para o teste OLS-MOSUM foi obtido uma observação de
+quebra no meio do ano de 2019. Para fins de assimilimar com o observado
+na série ambulatórial será considerada quebra no ano de 2020, em meados
+de Abril do ano.</p>
+</div>
+<div id="o-que-será-feito-agora" class="section level2">
+<h2><strong>O que será feito agora?</strong></h2>
+<p>Dessa forma, será feito a seguinte linha no trabalho:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Criar novas séries desconsiderando o ano de 2020;</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Dar continuidade as análises utilizando duas séries para os dados
+(ambulatorial e hospitalar);</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Realizar extrapolação das séries sem 2020 e avaliar com as séries
+com 2020.</li>
+</ol></li>
+</ul>
+<div id="série-ambulatorial-sem-2020" class="section level3">
+<h3><strong>Série Ambulatorial sem 2020</strong></h3>
+<pre class="r"><code>amb1.ts = ts(amb[1:60,2], start = c(2015,1), end = c(2019,12), frequency = 12)
+
+plot(amb1.ts)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Pela nova série criada não é perceptível alguma quebra na estrutura,
+como observado em 2020.</p>
+<pre class="r"><code># Série anual
+plot(aggregate(amb1.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="r"><code># Box-plot da sazonalidade da série
+boxplot(amb1.ts ~ cycle(amb1.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
+<pre class="r"><code># Decomposição da série
+plot(decompose(amb1.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-20-3.png" width="672" /></p>
+<p>Pelo agregado anual a série continua mantendo tendência linearmente
+positiva, pelos box-plots dos meses não é perceptível sazonalidade
+definida na série. O gráfico da decomposição da série mostra a tendência
+já relatada e a parte sazonal da série, mantendo-se a mesma leitura de
+que não há definição de sazonalidade na série.</p>
+<pre class="r"><code>decom = decompose(amb1.ts)
+trend = decom$trend
+season = decom$seasonal
+
+ts.plot(cbind(trend, trend+season), lty = 1:2)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Analisando o gráfico da tendência em conjunto com a tendência +
+sazonalidade é percebido como a série (despesas) cresce conforme o
+tempo.</p>
+</div>
+<div id="série-hospitalar-sem-2020" class="section level3">
+<h3><strong>Série Hospitalar sem 2020</strong></h3>
+<pre class="r"><code>hosp1.ts = ts(hosp[1:60,2], start = c(2015,1), end = c(2019,12), frequency = 12)
+
+plot(hosp1.ts)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Observando a série hospitalar sem o ano de 2020 pode-se identificar
+duas possíveis quebras no início de 2017 e em meados do meio de
+2019.</p>
+<pre class="r"><code># Série anual
+plot(aggregate(hosp1.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<pre class="r"><code># Box-plot da sazonalidade da série
+boxplot(hosp1.ts ~ cycle(hosp1.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<pre class="r"><code># Decomposição da série
+plot(decompose(hosp1.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-23-3.png" width="672" /></p>
+<p>O agregado anual da série mostra crescimento côncavo com sua
+concavidade no ano de 2017. O box-plot dos meses não mostra presença bem
+definida do efeito sazonal na série. O gráfico da série decomposta
+mostra o termo da tendência apresentando concavidade entre 2017 e 2019,
+como visto no agregado anual. O termo sazonal não tem efeito bem
+definido na série.</p>
+<pre class="r"><code>decom = decompose(hosp1.ts)
+trend = decom$trend
+season = decom$seasonal
+
+ts.plot(cbind(trend, trend+season), lty = 1:2)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>O efeito da tendência em conjunto com a tendência + sazonalidade da
+série mostra o efeito do crescimento côncavo das despesas hospitalares
+entre 2017 a 2019.</p>
+</div>
+</div>
+<div id="efeito-sazonal-das-novas-séries" class="section level2">
+<h2><strong>Efeito sazonal das novas séries</strong></h2>
+<p>Será assumido que as séries permanecem com a mesma interpretação
+quanto ao efeito sazonal nas séries, pois foi retirado 1 ano (12
+períodos) das séries completas.</p>
+</div>
+<div id="testes-de-estacionariedade" class="section level2">
+<h2><strong>Testes de estacionariedade</strong></h2>
+<p>Será utilizado dois testes para verificação da estacionariedade das
+séries (com e sem 2020), o KPSS e o ADF.</p>
+<p>Links contendo as informações dos testes feitos:</p>
+<p><a
+href="https://www.statsmodels.org/devel/examples/notebooks/generated/stationarity_detrending_adf_kpss.html"
+class="uri">https://www.statsmodels.org/devel/examples/notebooks/generated/stationarity_detrending_adf_kpss.html</a></p>
+<p><a
+href="https://www.machinelearningplus.com/time-series/kpss-test-for-stationarity/"
+class="uri">https://www.machinelearningplus.com/time-series/kpss-test-for-stationarity/</a></p>
+<p><a href="https://www.statology.org/kpss-test-in-r/"
+class="uri">https://www.statology.org/kpss-test-in-r/</a></p>
+<div
+id="kpss-h0-o-processo-é-estacionário-h1-a-série-é-não-estacionária"
+class="section level3">
+<h3>- <strong>KPSS: H0: O processo é estacionário | H1: A série é não
+estacionária</strong></h3>
+<div id="série-ambulatorial-4" class="section level4">
+<h4><strong>Série Ambulatorial</strong></h4>
+<pre class="r"><code># Série com 2020
+amb.ts %&gt;% urca::ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 3 lags. 
+## 
+## Value of test-statistic is: 1.3125 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<pre class="r"><code>amb.ts %&gt;% tseries::kpss.test()</code></pre>
+<pre><code>## Warning in tseries::kpss.test(.): p-value smaller than printed p-value</code></pre>
+<pre><code>## 
+##  KPSS Test for Level Stationarity
+## 
+## data:  .
+## KPSS Level = 1.3125, Truncation lag parameter = 3, p-value = 0.01</code></pre>
+<p>Utilizando a função <em>ur.kpss</em> do pacote <em>urca</em> foi
+observado o valor de 1.3125 para a estatística do teste para a série com
+2020, valor que está fora dos limites dos valores críticos, primeiro
+sinal de rejeição da hipótese nula. Com a função <em>kpss.test</em> do
+pacote <em>tseries</em> pode ser observado o p-valor do teste, sendo
+este de 0.01, menor que a significância de 0.05 dando indícios para a
+rejeição da hipótese nula em favor da alternativa, sendo então possível
+dizer que a série apresenta não estacionariedade.</p>
+<pre class="r"><code># Série sem 2020
+amb1.ts %&gt;% urca::ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 3 lags. 
+## 
+## Value of test-statistic is: 1.5001 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<pre class="r"><code>amb1.ts %&gt;% tseries::kpss.test()</code></pre>
+<pre><code>## Warning in tseries::kpss.test(.): p-value smaller than printed p-value</code></pre>
+<pre><code>## 
+##  KPSS Test for Level Stationarity
+## 
+## data:  .
+## KPSS Level = 1.5001, Truncation lag parameter = 3, p-value = 0.01</code></pre>
+<p>Utilizando a função <em>ur.kpss</em> do pacote <em>urca</em> foi
+observado o valor de 1.5 para a estatística do teste para a série sem
+2020, valor que está fora dos limites dos valores críticos, primeiro
+sinal de rejeição da hipótese nula. Com a função <em>kpss.test</em> do
+pacote <em>tseries</em> pode ser observado o p-valor do teste, sendo
+este de 0.01, menor que a significância de 0.05 dando indícios para a
+rejeição da hipótese nula em favor da alternativa, sendo então possível
+dizer que a série apresenta não estacionariedade.</p>
+</div>
+<div id="série-hospitalar-4" class="section level4">
+<h4><strong>Série Hospitalar</strong></h4>
+<pre class="r"><code># Série com 2020
+hosp.ts %&gt;% urca::ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 3 lags. 
+## 
+## Value of test-statistic is: 1.3236 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<pre class="r"><code>hosp.ts %&gt;% tseries::kpss.test()</code></pre>
+<pre><code>## Warning in tseries::kpss.test(.): p-value smaller than printed p-value</code></pre>
+<pre><code>## 
+##  KPSS Test for Level Stationarity
+## 
+## data:  .
+## KPSS Level = 1.3236, Truncation lag parameter = 3, p-value = 0.01</code></pre>
+<p>Utilizando a função <em>ur.kpss</em> do pacote <em>urca</em> foi
+observado o valor de 1.3236 para a estatística do teste para a série com
+2020, valor que está fora dos limites dos valores críticos, primeiro
+sinal de rejeição da hipótese nula. Com a função <em>kpss.test</em> do
+pacote <em>tseries</em> pode ser observado o p-valor do teste, sendo
+este de 0.01, menor que a significância de 0.05 dando indícios para a
+rejeição da hipótese nula em favor da alternativa, sendo então possível
+dizer que a série apresenta não estacionariedade.</p>
+<pre class="r"><code># Série sem 2020
+hosp1.ts %&gt;% urca::ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 3 lags. 
+## 
+## Value of test-statistic is: 1.3319 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<pre class="r"><code>hosp1.ts %&gt;% tseries::kpss.test()</code></pre>
+<pre><code>## Warning in tseries::kpss.test(.): p-value smaller than printed p-value</code></pre>
+<pre><code>## 
+##  KPSS Test for Level Stationarity
+## 
+## data:  .
+## KPSS Level = 1.3319, Truncation lag parameter = 3, p-value = 0.01</code></pre>
+<p>Utilizando a função <em>ur.kpss</em> do pacote <em>urca</em> foi
+observado o valor de 1.3319 para a estatística do teste para a série sem
+2020, valor que está fora dos limites dos valores críticos, primeiro
+sinal de rejeição da hipótese nula. Com a função <em>kpss.test</em> do
+pacote <em>tseries</em> pode ser observado o p-valor do teste, sendo
+este de 0.01, menor que a significância de 0.05 dando indícios para a
+rejeição da hipótese nula em favor da alternativa, sendo então possível
+dizer que a série apresenta não estacionariedade.</p>
+</div>
+</div>
+<div
+id="adf---h0-a-série-é-não-estacionária-h1-o-processo-é-estacionário"
+class="section level3">
+<h3>- <strong>ADF - H0: A série é não estacionária | H1: O processo é
+estacionário</strong></h3>
+<div id="série-ambulatorial-5" class="section level4">
+<h4><strong>Série Ambulatorial</strong></h4>
+<pre class="r"><code># Série com 2020
+amb.ts %&gt;% tseries::adf.test()</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  .
+## Dickey-Fuller = -2.8614, Lag order = 4, p-value = 0.2246
+## alternative hypothesis: stationary</code></pre>
+<pre class="r"><code># Série sem 2020
+amb1.ts %&gt;% tseries::adf.test()</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  .
+## Dickey-Fuller = -3.3262, Lag order = 3, p-value = 0.07605
+## alternative hypothesis: stationary</code></pre>
+<p>O teste ADF (Augmented Dickey-Fuller) pela função <em>adf.test</em>
+do pacote <em>tseries</em>, retornou o valor DF = -2.8614 e p-valor de
+0.2246, maior que o nível de significância padrão de 0.05, dessa forma,
+não se rejeita a hipótese nula, ou seja, é passível a existência de não
+estacionariedade na série com 2020. Já na série sem 2020 foi observado o
+valor de DF = -3.3262 com p-valor de 0.07605, maior que a significância
+de 0.05 do teste, rejeitando a hipótese nula frente a alternativa, de
+que a série sem 2020 é não estacionária.</p>
+</div>
+<div id="série-hospitalar-5" class="section level4">
+<h4><strong>Série Hospitalar</strong></h4>
+<pre class="r"><code># Série com 2020
+hosp.ts %&gt;% tseries::adf.test()</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  .
+## Dickey-Fuller = -1.9261, Lag order = 4, p-value = 0.6054
+## alternative hypothesis: stationary</code></pre>
+<pre class="r"><code># Série sem 2020
+hosp1.ts %&gt;% tseries::adf.test()</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  .
+## Dickey-Fuller = -3.3042, Lag order = 3, p-value = 0.07952
+## alternative hypothesis: stationary</code></pre>
+<p>O teste ADF (Augmented Dickey-Fuller) pela função <em>adf.test</em>
+do pacote <em>tseries</em>, retornou o valor DF = -1.9261 e p-valor de
+0.6054, maior que o nível de significância padrão de 0.05, dessa forma,
+não se rejeita a hipótese nula, ou seja, é passível a existência de não
+estacionariedade na série com 2020. Já na série sem 2020 foi observado o
+valor de DF = -3.3042 com p-valor de 0.07952, maior que a significância
+de 0.05 do teste, rejeitando a hipótese nula frente a alternativa, de
+que a série sem 2020 é não estacionária.</p>
+</div>
+</div>
+</div>
+<div id="diferenças-nas-séries" class="section level2">
+<h2><strong>Diferenças nas séries</strong></h2>
+<p>Agora parte-se para a tomada de diferenças na série e verificar
+quantas diferenças são suficientes para que a série se torne
+estacionária. A função <em>ndiffs</em> retorna a quantidade de
+diferenças na série para torná-la estacionaria. Iremos utilizá-la e
+depois refazer os testes para validar se agora as séries se tornaram
+estacionárias.</p>
+<pre class="r"><code># Série Ambulatorial com 2020
+ndiffs(amb.ts)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code># Série Ambulatorial sem 2020
+ndiffs(amb1.ts)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code># Série Hospitalar com 2020
+ndiffs(hosp.ts)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code># Série Hospitalar sem 2020
+ndiffs(hosp1.ts)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>Resultado foi de 1 diferença para as séries ambulatoriais com e sem
+2020. Mesmo valor de diferença observado para as duas séries
+hospitalares.</p>
+</div>
+<div id="retornando-para-os-testes" class="section level2">
+<h2><strong>Retornando para os testes:</strong></h2>
+<div
+id="kpss-h0-o-processo-é-estacionário-h1-a-série-é-não-estacionária-1"
+class="section level3">
+<h3>- <strong>KPSS: H0: O processo é estacionário | H1: A série é não
+estacionária</strong></h3>
+<div id="série-ambulatorial-6" class="section level4">
+<h4><strong>Série Ambulatorial</strong></h4>
+<pre class="r"><code># Série Ambulatorial com 2020
+amb.ts %&gt;% diff() %&gt;% urca::ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 3 lags. 
+## 
+## Value of test-statistic is: 0.043 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<pre class="r"><code>amb.ts %&gt;% diff() %&gt;% tseries::kpss.test()</code></pre>
+<pre><code>## Warning in tseries::kpss.test(.): p-value greater than printed p-value</code></pre>
+<pre><code>## 
+##  KPSS Test for Level Stationarity
+## 
+## data:  .
+## KPSS Level = 0.043025, Truncation lag parameter = 3, p-value = 0.1</code></pre>
+<pre class="r"><code># Série Ambulatorial sem 2020
+amb1.ts %&gt;% diff() %&gt;% urca::ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 3 lags. 
+## 
+## Value of test-statistic is: 0.0893 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<pre class="r"><code>amb1.ts %&gt;% diff() %&gt;% tseries::kpss.test()</code></pre>
+<pre><code>## Warning in tseries::kpss.test(.): p-value greater than printed p-value</code></pre>
+<pre><code>## 
+##  KPSS Test for Level Stationarity
+## 
+## data:  .
+## KPSS Level = 0.089262, Truncation lag parameter = 3, p-value = 0.1</code></pre>
+<p>Pelo teste KPSS, para a série com 2020, o resultado da estatística
+foi de 0.043, valor abaixo dos valores críticos, primeiro indício para a
+não rejeição da hipótese nula. O com p-valor igual a 0.1, superior a
+0.05. Dessa forma, opta-se por não rejeitar a hipótese nula de que a
+série ambulatorial com 2020, tomada uma diferença, é estacionária. Para
+a série sem 2020 foi obtido o valor de estatística igual a 0.0893,
+abaixo dos valores críticos, com p-valor igual a 0.1. Com esses
+resultados opta-se por não rejeitar a hipótese nula de que a série
+ambulatorial sem 2020 tomada uma diferência é estacionária.</p>
+</div>
+<div id="série-hospitalar-6" class="section level4">
+<h4><strong>Série Hospitalar</strong></h4>
+<pre class="r"><code># Série Hospitalar com 2020
+hosp.ts %&gt;% diff() %&gt;% urca::ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 3 lags. 
+## 
+## Value of test-statistic is: 0.0742 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<pre class="r"><code>hosp.ts %&gt;% diff() %&gt;% tseries::kpss.test()</code></pre>
+<pre><code>## Warning in tseries::kpss.test(.): p-value greater than printed p-value</code></pre>
+<pre><code>## 
+##  KPSS Test for Level Stationarity
+## 
+## data:  .
+## KPSS Level = 0.074193, Truncation lag parameter = 3, p-value = 0.1</code></pre>
+<pre class="r"><code># Série Hospitalar sem 2020
+hosp1.ts %&gt;% diff() %&gt;% urca::ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 3 lags. 
+## 
+## Value of test-statistic is: 0.0752 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<pre class="r"><code>hosp1.ts %&gt;% diff() %&gt;% tseries::kpss.test()</code></pre>
+<pre><code>## Warning in tseries::kpss.test(.): p-value greater than printed p-value</code></pre>
+<pre><code>## 
+##  KPSS Test for Level Stationarity
+## 
+## data:  .
+## KPSS Level = 0.075205, Truncation lag parameter = 3, p-value = 0.1</code></pre>
+<p>Pelo teste KPSS, para a série com 2020, o resultado da estatística
+foi de 0.0742, valor abaixo dos valores críticos, primeiro indício para
+a não rejeição da hipótese nula. O com p-valor igual a 0.1, superior a
+0.05. Dessa forma, opta-se por não rejeitar a hipótese nula de que a
+série hospitalar com 2020, tomada uma diferença, é estacionária. Para a
+série sem 2020 foi obtido o valor de estatística igual a 0.0752, abaixo
+dos valores críticos, com p-valor igual a 0.1. Com esses resultados
+opta-se por não rejeitar a hipótese nula de que a série hospitalar sem
+2020 tomada uma diferência é estacionária.</p>
+</div>
+</div>
+<div
+id="adf---h0-a-série-é-não-estacionária-h1-o-processo-é-estacionário-1"
+class="section level3">
+<h3>- <strong>ADF - H0: A série é não estacionária | H1: O processo é
+estacionário</strong></h3>
+<div id="série-ambulatorial-7" class="section level4">
+<h4><strong>Série Ambulatorial</strong></h4>
+<pre class="r"><code># Série Ambulatorial com 2020
+amb.ts %&gt;% diff() %&gt;% tseries::adf.test()</code></pre>
+<pre><code>## Warning in tseries::adf.test(.): p-value smaller than printed p-value</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  .
+## Dickey-Fuller = -4.9262, Lag order = 4, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<pre class="r"><code># Série Ambulatorial sem 2020
+amb1.ts %&gt;% diff() %&gt;% tseries::adf.test()</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  .
+## Dickey-Fuller = -4.0129, Lag order = 3, p-value = 0.01522
+## alternative hypothesis: stationary</code></pre>
+</div>
+</div>
+</div>
+<div
+id="pelo-teste-adf-para-a-série-ambulatorial-com-2020-o-resultado-da-estatística-foi-de--4.9262-com-p-valor-de-0.01-sendo-inferior-ao-nível-de-significância-de-0.05-sendo-então-cabível-a-rejeição-da-hipótese-nula-e-a-não-rejeição-da-hipótese-alternativa-onde-diz-que-a-série-ambulatorial-com-2020-tomada-uma-diferença-é-estacionária.-para-a-série-sem-2020-foi-obtido-o-valor-de-estatística-igual-a--4.0129-com-p-valor-de-0.01522-inferior-a-significância-de-0.05-optando-então-pela-rejeição-da-hipótese-nula-e-a-não-rejeição-da-hipótese-alternativa-sendo-então-a-série-ambulatorial-sem-2020-tomada-uma-diferença-estacionária."
+class="section level1">
+<h1>Pelo teste ADF, para a série ambulatorial com 2020, o resultado da
+estatística foi de -4.9262 com p-valor de 0.01, sendo inferior ao nível
+de significância de 0.05, sendo então cabível a rejeição da hipótese
+nula e a não rejeição da hipótese alternativa, onde diz que a série
+ambulatorial com 2020, tomada uma diferença, é estacionária. Para a
+série sem 2020 foi obtido o valor de estatística igual a -4.0129 com
+p-valor de 0.01522, inferior a significância de 0.05, optando então pela
+rejeição da hipótese nula e a não rejeição da hipótese alternativa,
+sendo então a série ambulatorial sem 2020, tomada uma diferença,
+estacionária.</h1>
+<div id="analisando-graficamente-as-séries-com-1-diferença"
+class="section level4">
+<h4>Analisando graficamente as séries com 1 diferença</h4>
+<pre class="r"><code># Série Ambulatorial com 2020
+amb.ts %&gt;% diff() %&gt;% plot()</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<pre class="r"><code># Série Ambulatorial sem 2020
+amb1.ts %&gt;% diff() %&gt;% plot()</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-35-2.png" width="672" /></p>
+<p>Graficamente é percebido que, tomando uma diferença, ambas as séries
+se tornaram estacionárias.</p>
+</div>
+<div id="série-hospitalar-7" class="section level4">
+<h4><strong>Série Hospitalar</strong></h4>
+<pre class="r"><code># Série Hospitalar com 2020
+hosp.ts %&gt;% diff() %&gt;% tseries::adf.test()</code></pre>
+<pre><code>## Warning in tseries::adf.test(.): p-value smaller than printed p-value</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  .
+## Dickey-Fuller = -4.1471, Lag order = 4, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<pre class="r"><code># Série Hospitalar sem 2020
+hosp1.ts %&gt;% diff() %&gt;% tseries::adf.test()</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  .
+## Dickey-Fuller = -3.637, Lag order = 3, p-value = 0.03778
+## alternative hypothesis: stationary</code></pre>
+<p>Pelo teste ADF, para a série hospitalar com 2020, o resultado da
+estatística foi de -4.1471 com p-valor de 0.01, sendo inferior ao nível
+de significância de 0.05, sendo então cabível a rejeição da hipótese
+nula e a não rejeição da hipótese alternativa, onde diz que a série
+hospitalar com 2020, tomada uma diferença, é estacionária. Para a série
+sem 2020 foi obtido o valor de estatística igual a -3.637 com p-valor de
+0.03778, inferior a significância de 0.05, optando então pela rejeição
+da hipótese nula e a não rejeição da hipótese alternativa, sendo então a
+série hospitalar sem 2020, tomada uma diferença, estacionária.</p>
+</div>
+<div id="analisando-graficamente-as-séries-com-1-diferença-1"
+class="section level4">
+<h4>Analisando graficamente as séries com 1 diferença</h4>
+<pre class="r"><code># Série Hospitalar com 2020
+hosp.ts %&gt;% diff() %&gt;% plot()</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<pre class="r"><code># Série Hospitalar sem 2020
+hosp1.ts %&gt;% diff() %&gt;% plot()</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-37-2.png" width="672" /></p>
+<p>Graficamente é percebido que, tomando uma diferença, ambas as séries
+se tornaram estacionárias.</p>
+</div>
+<div
+id="função-de-auto-correlação-facacf-e-função-de-auto-correlação-parcial-facppacf"
+class="section level2">
+<h2>Função de Auto Correlação (FAC/ACF) e Função de Auto Correlação
+Parcial (FACP/PACF)</h2>
+<p>ACF e PACF (Auto Correlation Function &amp; Partial Auto Correlation
+Function)</p>
+<p>Link: <a href="https://rc2e.com/timeseriesanalysis"
+class="uri">https://rc2e.com/timeseriesanalysis</a></p>
+<div id="série-ambulatorial-8" class="section level4">
+<h4><strong>Série Ambulatorial</strong></h4>
+<pre class="r"><code># Série Ambulatorial com 2020
+par(mfrow = c(2,1))
+acf(diff(amb.ts))
+pacf(diff(amb.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>Analisando o ACF e o PACF da série ambulatorial com 2020 tomada 1
+diferença é perceptível que trata-se de um processo de média móvel de
+ordem 1 [MA(1)] com <span class="math inline">\(\theta_1 &lt;
+0\)</span>.</p>
+<pre class="r"><code># Série Ambulatorial sem 2020
+par(mfrow = c(2,1))
+acf(diff(amb1.ts))
+pacf(diff(amb1.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>Analisando o ACF e o PACF da série ambulatorial sem 2020 tomada 1
+diferença é perceptível que trata-se de um processo de média móvel de
+ordem 1 [MA(1)] com <span class="math inline">\(\theta_1 &gt;
+0\)</span>.</p>
+</div>
+<div id="série-hospitalar-8" class="section level4">
+<h4><strong>Série Hospitalar</strong></h4>
+<pre class="r"><code># Série Hospitalar com 2020
+par(mfrow = c(2,1))
+acf(diff(hosp.ts))
+pacf(diff(hosp.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>Analisando o ACF e o PACF da série hospitalar com 2020 tomada 1
+diferença é perceptível que trata-se de um processo de média móvel de
+ordem 1 [MA(1)] com <span class="math inline">\(\theta_1 &gt;
+0\)</span>.</p>
+<pre class="r"><code># Série Hospitalar sem 2020
+par(mfrow = c(2,1))
+acf(diff(amb1.ts))
+pacf(diff(amb1.ts))</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>Analisando o ACF e o PACF da série hospitalar sem 2020 tomada 1
+diferença é perceptível que trata-se de um processo de média móvel de
+ordem 1 [MA(1)] com <span class="math inline">\(\theta_1 &gt;
+0\)</span>.</p>
+</div>
+</div>
+<div id="estimação-do-modelo" class="section level2">
+<h2><strong>Estimação do modelo</strong></h2>
+<div id="série-ambulatorial-9" class="section level4">
+<h4><strong>Série Ambulatorial</strong></h4>
+<pre class="r"><code># Série Ambulatorial com 2020
+fit.amb = Arima(amb.ts,
+                order = c(1,1,1), 
+                seasonal = c(1,1,1), 
+                method = &quot;ML&quot;)
+
+BETS::t_test(fit.amb) # Testando se os parâmetros são significativos</code></pre>
+<pre><code>##          Coeffs Std.Errors         t Crit.Values Rej.H0
+## ar1   0.7742958 0.08889854 8.7098819    1.996564   TRUE
+## ma1  -0.9998711 0.15440002 6.4758482    1.996564   TRUE
+## sar1  0.2678827 0.34982574 0.7657604    1.996564  FALSE
+## sma1 -0.6656108 0.32746160 2.0326376    1.996564   TRUE</code></pre>
+<pre class="r"><code># Série Ambulatorial sem 2020
+fit.amb1 = Arima(amb1.ts,
+                order = c(1,1,1), 
+                seasonal = c(1,1,1), 
+                method = &quot;ML&quot;)
+
+BETS::t_test(fit.amb1) # Testando se os parâmetros são significativos</code></pre>
+<pre><code>##           Coeffs Std.Errors         t Crit.Values Rej.H0
+## ar1   0.06253328  0.2232942 0.2800488    2.004879  FALSE
+## ma1  -0.73186775  0.1603516 4.5641438    2.004879   TRUE
+## sar1  0.34209506  0.2322101 1.4732136    2.004879  FALSE
+## sma1 -0.99953822  0.7191281 1.3899308    2.004879  FALSE</code></pre>
+<p>Utilizando um modelo inicial genérico para avaliação dos
+coeficientes, com todos os coeficientes iguais a 1 nas ordem dos
+parâmetros do ARIMA e na parte sazonal também. A função <em>t_test</em>
+do pacote <em>BETS</em> utiliza-se da estatística <em>t</em> para o
+seguinte teste de hipótese:</p>
+<p><span class="math inline">\(H_0: \text{ parâmetro} = 0 \\ H_1: \text{
+parâmetro} \neq 0\)</span></p>
+<p>Como resultado do modelo inicial, para a série ambulatorial com 2020,
+foi constatado a rejeição da hipótese nula para as partes auto
+regressivas (não sazonal e sazonal), sendo então o segundo modelo de
+teste um SARIMA(1,1,1)(0,1,1).</p>
+<p>Para a série ambulatorial sem 2020 foi observado não rejeição de
+<span class="math inline">\(H_0\)</span> para a parte auto regressiva
+(não sazonal e sazonal) e para a parte sazonal de média móvel, sendo
+então um modelo SARIMA(0,1,1)(0,1,0)</p>
+<pre class="r"><code># Série Ambulatorial com 2020
+fit.amb = Arima(amb.ts,
+                order = c(1,1,1), 
+                seasonal = c(0,1,1), 
+                method = &quot;ML&quot;)
+
+BETS::t_test(fit.amb) # Testando se os parâmetros são significativos</code></pre>
+<pre><code>##          Coeffs Std.Errors        t Crit.Values Rej.H0
+## ar1   0.7736080 0.08933419 8.659708    1.996008   TRUE
+## ma1  -0.9999802 0.26376372 3.791197    1.996008   TRUE
+## sma1 -0.4540283 0.20993395 2.162720    1.996008   TRUE</code></pre>
+<pre class="r"><code># Série Ambulatorial sem 2020
+fit.amb1 = Arima(amb1.ts,
+                order = c(0,1,1), 
+                seasonal = c(0,1,0), 
+                method = &quot;ML&quot;)
+
+BETS::t_test(fit.amb1) # Testando se os parâmetros são significativos</code></pre>
+<pre><code>##         Coeffs Std.Errors        t Crit.Values Rej.H0
+## ma1 -0.6696575  0.1131678 5.917388    2.002465   TRUE</code></pre>
+</div>
+<div id="avaliando-pelo-auto.arima" class="section level4">
+<h4>Avaliando pelo <em>auto.arima</em></h4>
+<p>Avaliaremos agora os modelos são os ideais utilizando a função
+<em>auto.arima</em> que fornece o modelo ideal para uma determinada
+série.</p>
+<pre class="r"><code># Série Ambulatorial com 2020
+fit.amb_aa = auto.arima(amb.ts, seasonal = F, stationary = F, method = &quot;ML&quot;)
+
+fit.amb_aa</code></pre>
+<pre><code>## Series: amb.ts 
+## ARIMA(1,1,1) 
+## 
+## Coefficients:
+##          ar1      ma1
+##       0.5900  -0.8606
+## s.e.  0.1483   0.0876
+## 
+## sigma^2 = 4.171e+14:  log likelihood = -1294.99
+## AIC=2595.99   AICc=2596.34   BIC=2602.77</code></pre>
+<pre class="r"><code># Série Ambulatorial sem 2020
+fit.amb1_aa = auto.arima(amb1.ts, seasonal = F, stationary = F, method = &quot;ML&quot;)
+
+fit.amb1_aa</code></pre>
+<pre><code>## Series: amb1.ts 
+## ARIMA(0,1,1) with drift 
+## 
+## Coefficients:
+##           ma1      drift
+##       -0.8523  1725137.1
+## s.e.   0.1492   335643.2
+## 
+## sigma^2 = 2.107e+14:  log likelihood = -1056.31
+## AIC=2118.61   AICc=2119.05   BIC=2124.84</code></pre>
+<p>Pelo <em>auto.arima</em> o melhor modelo seria um ARIMA(1,1,1), sem a
+parte sazonal, para a série ambulatorial com 2020. Para os dados
+ambulatorial sem 2020 o <em>auto.arima</em> sugere um modelo
+ARIMA(0,1,1) com drift.</p>
+</div>
+<div id="série-hospitalar-9" class="section level4">
+<h4><strong>Série Hospitalar</strong></h4>
+<pre class="r"><code># Série Hospitalar com 2020
+fit.hosp = Arima(hosp.ts,
+                order = c(1,1,1), 
+                seasonal = c(1,1,1), 
+                method = &quot;ML&quot;)
+
+BETS::t_test(fit.hosp) # Testando se os parâmetros são significativos</code></pre>
+<pre><code>##           Coeffs Std.Errors          t Crit.Values Rej.H0
+## ar1  -0.10612014  0.3823072 0.27757819    1.996564  FALSE
+## ma1  -0.22600718  0.3754062 0.60203371    1.996564  FALSE
+## sar1  0.02152245  0.3257667 0.06606706    1.996564  FALSE
+## sma1 -0.65627726  0.3739415 1.75502673    1.996564  FALSE</code></pre>
+<pre class="r"><code># Série Hospitalar sem 2020
+fit.hosp1 = Arima(hosp1.ts,
+                order = c(1,1,1), 
+                seasonal = c(1,1,1), 
+                method = &quot;ML&quot;)
+
+BETS::t_test(fit.hosp1) # Testando se os parâmetros são significativos</code></pre>
+<pre><code>## Warning in sqrt(diag(model$var.coef)): NaNs produzidos</code></pre>
+<pre><code>##            Coeffs Std.Errors         t Crit.Values Rej.H0
+## ar1  -0.004321836        NaN       NaN    2.004879     NA
+## ma1  -0.060492250  0.1500134 0.4032456    2.004879  FALSE
+## sar1 -0.147774427        NaN       NaN    2.004879     NA
+## sma1 -0.408684081  0.1971485 2.0729759    2.004879   TRUE</code></pre>
+<p>Utilizando um modelo inicial genérico para avaliação dos
+coeficientes, com todos os coeficientes iguais a 1 nas ordem dos
+parâmetros do ARIMA e na parte sazonal também. A função <em>t_test</em>
+do pacote <em>BETS</em> utiliza-se da estatística <em>t</em> para o
+seguinte teste de hipótese:</p>
+<p><span class="math inline">\(H_0: \text{ parâmetro} = 0 \\ H_1: \text{
+parâmetro} \neq 0\)</span></p>
+<p>Como resultado do modelo inicial, para a série hospitalar com 2020,
+foi constatado a rejeição da hipótese nula para as partes auto
+regressiva e média móvel (não sazonal e sazonal), sendo então o segundo
+modelo de teste um SARIMA(0,1,0)(0,1,0).</p>
+<p>Para a série hospitalar sem 2020 foi observado não rejeição de <span
+class="math inline">\(H_0\)</span> para a parte não sazonal de média
+móvel. A parte auto regressiva gerou NA no desvio-padrão, logo não pode
+ser incluído no teste. Dessa forma, o modelo de teste seria um
+SARIMA(0,1,0)(0,1,1)</p>
+<pre class="r"><code># Série Hospitalar com 2020
+fit.hosp = Arima(hosp.ts,
+                order = c(0,1,0), 
+                seasonal = c(0,1,0), 
+                method = &quot;ML&quot;)
+
+# Série Hospitalar sem 2020
+fit.hosp1 = Arima(hosp1.ts,
+                order = c(0,1,0), 
+                seasonal = c(0,1,1), 
+                method = &quot;ML&quot;)
+
+BETS::t_test(fit.hosp1) # Testando se os parâmetros são significativos</code></pre>
+<pre><code>##          Coeffs Std.Errors        t Crit.Values Rej.H0
+## sma1 -0.5320629  0.2097297 2.536898    2.002465   TRUE</code></pre>
+</div>
+<div id="avaliando-pelo-auto.arima-1" class="section level4">
+<h4>Avaliando pelo <em>auto.arima</em></h4>
+<p>Avaliaremos agora se os modelos propostos são os ideais utilizando a
+função <em>auto.arima</em> que fornece o modelo ideal para uma
+determinada série.</p>
+<pre class="r"><code># Série Hospitalar com 2020
+fit.hosp_aa = auto.arima(hosp.ts, seasonal = F, stationary = F, method = &quot;ML&quot;)
+
+fit.hosp_aa</code></pre>
+<pre><code>## Series: hosp.ts 
+## ARIMA(1,1,0) 
+## 
+## Coefficients:
+##           ar1
+##       -0.5066
+## s.e.   0.1018
+## 
+## sigma^2 = 6.715e+13:  log likelihood = -1230.64
+## AIC=2465.27   AICc=2465.45   BIC=2469.8</code></pre>
+<pre class="r"><code># Série Hospitalar sem 2020
+fit.hosp1_aa = auto.arima(hosp1.ts, seasonal = F, stationary = F, method = &quot;ML&quot;)
+
+fit.hosp1_aa</code></pre>
+<pre><code>## Series: hosp1.ts 
+## ARIMA(1,1,0) 
+## 
+## Coefficients:
+##           ar1
+##       -0.2840
+## s.e.   0.1258
+## 
+## sigma^2 = 5.487e+13:  log likelihood = -1016.52
+## AIC=2037.03   AICc=2037.25   BIC=2041.19</code></pre>
+<p>Pelo <em>auto.arima</em> o melhor modelo seria um ARIMA(1,1,0), sem a
+parte sazonal, para a série hospitalar com 2020. Para os dados
+hospitalar sem 2020 o <em>auto.arima</em> sugere um modelo ARIMA(1,1,0),
+mesmo modelo da série com 2020.</p>
+</div>
+</div>
+<div id="estimando-os-modelos" class="section level2">
+<h2><strong>Estimando os Modelos</strong></h2>
+<div id="série-ambulatorial-10" class="section level4">
+<h4><strong>Série Ambulatorial</strong></h4>
+<pre class="r"><code># Série Ambulatorial com 2020
+model.amb = Arima(amb.ts,order = c(1,1,1), method = &quot;ML&quot;)
+
+model.amb %&gt;% fitted() %&gt;% plot(ylim = c(7.9*10^7, 2.2*10^8), main = &quot;Série Ambulatorial com 2020&quot;)
+amb.ts %&gt;% lines(col = &quot;red&quot;, lty = 2)
+legend(&quot;topleft&quot;, c(&quot;Série Predita&quot;, &quot;Série Original&quot;), lty = c(1, 2), col = c(1,&quot;red&quot;), merge = T)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<pre class="r"><code>amb.prev = model.amb %&gt;% forecast(level = 95, h = 24) # Realizando previsão para 24 períodos a frente com nível de 95% de confiança
+
+amb.prev %&gt;% autoplot() # Gráfico da previsão</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-48-2.png" width="672" /></p>
+<pre class="r"><code># Série Ambulatorial sem 2020
+model.amb1 = Arima(amb1.ts,order = c(0,1,1), method = &quot;ML&quot;, include.drift = T)
+
+model.amb1 %&gt;% fitted() %&gt;% plot(ylim = c(7.9*10^7, 2.2*10^8), main = &quot;Série Ambulatorial sem 2020&quot;)
+amb1.ts %&gt;% lines(col = &quot;red&quot;, lty = 2)
+legend(&quot;topleft&quot;, c(&quot;Série Predita&quot;, &quot;Série Original&quot;), lty = c(1, 2), col = c(1,&quot;red&quot;), merge = T)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<pre class="r"><code>amb1.prev = model.amb1 %&gt;% forecast(level = 95, h = 36) # Realizando previsão para 36 períodos a frente com nível de 95% de confiança
+
+amb1.prev %&gt;% autoplot() # Gráfico da previsão</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-49-2.png" width="672" /></p>
+</div>
+<div id="série-hospitalar-10" class="section level4">
+<h4><strong>Série Hospitalar</strong></h4>
+<pre class="r"><code># Série Hospitalar com 2020
+model.hosp = Arima(hosp.ts,order = c(1,1,0), method = &quot;ML&quot;)
+
+model.hosp %&gt;% fitted() %&gt;% plot(ylim = c(5*10^7, 1.3*10^8), main = &quot;Série Hospitalar com 2020&quot;)
+hosp.ts %&gt;% lines(col = &quot;red&quot;, lty = 2)
+legend(&quot;topleft&quot;, c(&quot;Série Predita&quot;, &quot;Série Original&quot;), lty = c(1, 2), col = c(1,&quot;red&quot;), merge = T)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<pre class="r"><code>hosp.prev = model.hosp %&gt;% forecast(level = 95, h = 24) # Realizando previsão para 24 períodos a frente com nível de 95% de confiança
+
+hosp.prev %&gt;% autoplot() # Gráfico da previsão</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-50-2.png" width="672" /></p>
+<pre class="r"><code># Série Hospitalar sem 2020
+model.hosp1 = Arima(hosp1.ts,order = c(1,1,0), method = &quot;ML&quot;)
+
+model.hosp1 %&gt;% fitted() %&gt;% plot(ylim = c(5*10^7, 1.3*10^8), main = &quot;Série Hospitalar sem 2020&quot;)
+hosp1.ts %&gt;% lines(col = &quot;red&quot;, lty = 2)
+legend(&quot;topleft&quot;, c(&quot;Série Predita&quot;, &quot;Série Original&quot;), lty = c(1, 2), col = c(1,&quot;red&quot;), merge = T)</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<pre class="r"><code>hosp1.prev = model.hosp1 %&gt;% forecast(level = 95, h = 36) # Realizando previsão para 36 períodos a frente com nível de 95% de confiança
+
+hosp1.prev %&gt;% autoplot() # Gráfico da previsão</code></pre>
+<p><img src="desp_files/figure-html/unnamed-chunk-51-2.png" width="672" /></p>
+</div>
+</div>
+<div id="comparando-o-observado-em-2020-x-previsto-pelo-arima"
+class="section level2">
+<h2><strong>Comparando o observado em 2020 x Previsto pelo
+ARIMA</strong></h2>
+<div id="série-ambulatorial-11" class="section level3">
+<h3><strong>Série Ambulatorial</strong></h3>
+<pre class="r"><code># Série ambulatorial observada em 2020
+amb_obs.2020 = data.frame(Observado = amb.ts[61:72])
+
+# Série ambulatorial prevista para 2020
+amb_prev.2020 = data.frame(
+  Prev.Lower = amb1.prev$lower[1:12],
+  Prev.Mean = amb1.prev$mean[1:12],
+  Prev.Upper = amb1.prev$upper[1:12])
+
+# Gráfico Observado x Previsto
+datas = seq.Date(from = as.Date(&quot;2020-01-01&quot;), length.out = 12, by = &quot;month&quot;)
+colores = c(&quot;Observado&quot; = &quot;black&quot;, &quot;Mínimo&quot; = &quot;red&quot;, &quot;Médio&quot; = &quot;blue&quot;, &quot;Máximo&quot; = &quot;darkgreen&quot;)
+
+plt_amb = ggplot() +
+  geom_line(aes(y = Observado, x = datas, col = &quot;Observado&quot;), size = 1, lty = 1, data = amb_obs.2020) +
+  geom_line(aes(y = Prev.Lower, x = datas , col = &quot;Mínimo&quot;), size = 1, lty = 2, data = amb_prev.2020) +
+  geom_line(aes(y = Prev.Mean, x = datas, col = &quot;Médio&quot;), size = 1, lty = 3, data = amb_prev.2020) +
+  geom_line(aes(y = Prev.Upper, x = datas, col = &quot;Máximo&quot;), size = 1, lty = 4, data = amb_prev.2020) +
+  scale_x_date(date_breaks = &quot;1 month&quot;, 
+               date_labels = &quot;%b/%Y&quot;) +
+  theme(axis.text.x = element_text(angle = 60, 
+                                   hjust = 1)) +
+  labs(title = &quot;Ambulatorial: Observado x Previsto (95% de confiança)&quot;, x = &quot;Meses&quot;, y = &quot;Valores&quot;, color = &quot;Legenda&quot;) +
+  scale_color_manual(values = colores)
+
+plotly::ggplotly(plt_amb)</code></pre>
+<div id="htmlwidget-c56a122d8f20d5e40aa3" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c56a122d8f20d5e40aa3">{"x":{"data":[{"x":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"y":[211644327,180376645,153369441,79382434,96082042,129484321,173181930,173428882,196933222,204786377,190903930,180490335],"text":["datas: 2020-01-01<br />Observado: 211644327<br />colour: Observado","datas: 2020-02-01<br />Observado: 180376645<br />colour: Observado","datas: 2020-03-01<br />Observado: 153369441<br />colour: Observado","datas: 2020-04-01<br />Observado:  79382434<br />colour: Observado","datas: 2020-05-01<br />Observado:  96082042<br />colour: Observado","datas: 2020-06-01<br />Observado: 129484321<br />colour: Observado","datas: 2020-07-01<br />Observado: 173181930<br />colour: Observado","datas: 2020-08-01<br />Observado: 173428882<br />colour: Observado","datas: 2020-09-01<br />Observado: 196933222<br />colour: Observado","datas: 2020-10-01<br />Observado: 204786377<br />colour: Observado","datas: 2020-11-01<br />Observado: 190903930<br />colour: Observado","datas: 2020-12-01<br />Observado: 180490335<br />colour: Observado"],"type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","name":"Observado","legendgroup":"Observado","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"y":[175274177.976076,176690455.494371,178110014.760531,179532753.336413,180958574.004768,182387384.404135,183819096.695931,185253627.260316,186690896.41786,188130828.174388,189573349.986674,191018392.546958],"text":["datas: 2020-01-01<br />Prev.Lower: 175274178<br />colour: Mínimo","datas: 2020-02-01<br />Prev.Lower: 176690455<br />colour: Mínimo","datas: 2020-03-01<br />Prev.Lower: 178110015<br />colour: Mínimo","datas: 2020-04-01<br />Prev.Lower: 179532753<br />colour: Mínimo","datas: 2020-05-01<br />Prev.Lower: 180958574<br />colour: Mínimo","datas: 2020-06-01<br />Prev.Lower: 182387384<br />colour: Mínimo","datas: 2020-07-01<br />Prev.Lower: 183819097<br />colour: Mínimo","datas: 2020-08-01<br />Prev.Lower: 185253627<br />colour: Mínimo","datas: 2020-09-01<br />Prev.Lower: 186690896<br />colour: Mínimo","datas: 2020-10-01<br />Prev.Lower: 188130828<br />colour: Mínimo","datas: 2020-11-01<br />Prev.Lower: 189573350<br />colour: Mínimo","datas: 2020-12-01<br />Prev.Lower: 191018393<br />colour: Mínimo"],"type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(255,0,0,1)","dash":"dash"},"hoveron":"points","name":"Mínimo","legendgroup":"Mínimo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"y":[203726223.042201,205451360.159481,207176497.276762,208901634.394043,210626771.511323,212351908.628604,214077045.745885,215802182.863165,217527319.980446,219252457.097727,220977594.215008,222702731.332288],"text":["datas: 2020-01-01<br />Prev.Mean: 203726223<br />colour: Médio","datas: 2020-02-01<br />Prev.Mean: 205451360<br />colour: Médio","datas: 2020-03-01<br />Prev.Mean: 207176497<br />colour: Médio","datas: 2020-04-01<br />Prev.Mean: 208901634<br />colour: Médio","datas: 2020-05-01<br />Prev.Mean: 210626772<br />colour: Médio","datas: 2020-06-01<br />Prev.Mean: 212351909<br />colour: Médio","datas: 2020-07-01<br />Prev.Mean: 214077046<br />colour: Médio","datas: 2020-08-01<br />Prev.Mean: 215802183<br />colour: Médio","datas: 2020-09-01<br />Prev.Mean: 217527320<br />colour: Médio","datas: 2020-10-01<br />Prev.Mean: 219252457<br />colour: Médio","datas: 2020-11-01<br />Prev.Mean: 220977594<br />colour: Médio","datas: 2020-12-01<br />Prev.Mean: 222702731<br />colour: Médio"],"type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(0,0,255,1)","dash":"dot"},"hoveron":"points","name":"Médio","legendgroup":"Médio","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"y":[232178268.108326,234212264.824592,236242979.792994,238270515.451672,240294969.017879,242316432.853073,244334994.795839,246350738.466015,248363743.543032,250374086.021066,252381838.443341,254387070.117619],"text":["datas: 2020-01-01<br />Prev.Upper: 232178268<br />colour: Máximo","datas: 2020-02-01<br />Prev.Upper: 234212265<br />colour: Máximo","datas: 2020-03-01<br />Prev.Upper: 236242980<br />colour: Máximo","datas: 2020-04-01<br />Prev.Upper: 238270515<br />colour: Máximo","datas: 2020-05-01<br />Prev.Upper: 240294969<br />colour: Máximo","datas: 2020-06-01<br />Prev.Upper: 242316433<br />colour: Máximo","datas: 2020-07-01<br />Prev.Upper: 244334995<br />colour: Máximo","datas: 2020-08-01<br />Prev.Upper: 246350738<br />colour: Máximo","datas: 2020-09-01<br />Prev.Upper: 248363744<br />colour: Máximo","datas: 2020-10-01<br />Prev.Upper: 250374086<br />colour: Máximo","datas: 2020-11-01<br />Prev.Upper: 252381838<br />colour: Máximo","datas: 2020-12-01<br />Prev.Upper: 254387070<br />colour: Máximo"],"type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(0,100,0,1)","dash":"dashdot"},"hoveron":"points","name":"Máximo","legendgroup":"Máximo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":66.4840182648402},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Ambulatorial: Observado x Previsto (95% de confiança)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[18245.25,18613.75],"tickmode":"array","ticktext":["jan/2020","fev/2020","mar/2020","abr/2020","mai/2020","jun/2020","jul/2020","ago/2020","set/2020","out/2020","nov/2020","dez/2020"],"tickvals":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"categoryorder":"array","categoryarray":["jan/2020","fev/2020","mar/2020","abr/2020","mai/2020","jun/2020","jul/2020","ago/2020","set/2020","out/2020","nov/2020","dez/2020"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-60,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Meses","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[70632202.1941191,263137301.9235],"tickmode":"array","ticktext":["1.0e+08","1.5e+08","2.0e+08","2.5e+08"],"tickvals":[100000000,150000000,200000000,250000000],"categoryorder":"array","categoryarray":["1.0e+08","1.5e+08","2.0e+08","2.5e+08"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Valores","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Legenda","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"55c455946c5c":{"x":{},"y":{},"colour":{},"type":"scatter"},"55c42a6dc004":{"x":{},"y":{},"colour":{}},"55c43c43d612":{"x":{},"y":{},"colour":{}},"55c46e3ea28a":{"x":{},"y":{},"colour":{}}},"cur_data":"55c455946c5c","visdat":{"55c455946c5c":["function (y) ","x"],"55c42a6dc004":["function (y) ","x"],"55c43c43d612":["function (y) ","x"],"55c46e3ea28a":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="série-hospitalar-11" class="section level3">
+<h3><strong>Série Hospitalar</strong></h3>
+<pre class="r"><code># Série hospitalar observada em 2020
+hosp_obs.2020 = data.frame(Observado = hosp.ts[61:72])
+
+# Série hospitalar prevista para 2020
+hosp_prev.2020 = data.frame(
+  Prev.Lower = hosp1.prev$lower[1:12],
+  Prev.Mean = hosp1.prev$mean[1:12],
+  Prev.Upper = hosp1.prev$upper[1:12])
+
+# Gráfico Observado x Previsto
+datas = seq.Date(from = as.Date(&quot;2020-01-01&quot;), length.out = 12, by = &quot;month&quot;)
+colores = c(&quot;Observado&quot; = &quot;black&quot;, &quot;Mínimo&quot; = &quot;red&quot;, &quot;Médio&quot; = &quot;blue&quot;, &quot;Máximo&quot; = &quot;darkgreen&quot;)
+
+plt_hosp = ggplot() +
+  geom_line(aes(y = Observado, x = datas, col = &quot;Observado&quot;), size = 1, lty = 1, data = hosp_obs.2020) +
+  geom_line(aes(y = Prev.Lower, x = datas , col = &quot;Mínimo&quot;), size = 1, lty = 2, data = hosp_prev.2020) +
+  geom_line(aes(y = Prev.Mean, x = datas, col = &quot;Médio&quot;), size = 1, lty = 3, data = hosp_prev.2020) +
+  geom_line(aes(y = Prev.Upper, x = datas, col = &quot;Máximo&quot;), size = 1, lty = 4, data = hosp_prev.2020) +
+  scale_x_date(date_breaks = &quot;1 month&quot;, 
+               date_labels = &quot;%b/%Y&quot;) +
+  theme(axis.text.x = element_text(angle = 60, 
+                                   hjust = 1)) +
+  labs(title = &quot;Hospitalar: Observado x Previsto (95% de confiança)&quot;, x = &quot;Meses&quot;, y = &quot;Valores&quot;, color = &quot;Legenda&quot;) +
+  scale_color_manual(values = colores)
+
+plotly::ggplotly(plt_hosp)</code></pre>
+<div id="htmlwidget-d77da2e0ba056b8ef935" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d77da2e0ba056b8ef935">{"x":{"data":[{"x":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"y":[101185534,90192130,96172792,68507917,103191851,82783054,86398032,93140835,89509711,97352685,88747765,88048978],"text":["datas: 2020-01-01<br />Observado: 101185534<br />colour: Observado","datas: 2020-02-01<br />Observado:  90192130<br />colour: Observado","datas: 2020-03-01<br />Observado:  96172792<br />colour: Observado","datas: 2020-04-01<br />Observado:  68507917<br />colour: Observado","datas: 2020-05-01<br />Observado: 103191851<br />colour: Observado","datas: 2020-06-01<br />Observado:  82783054<br />colour: Observado","datas: 2020-07-01<br />Observado:  86398032<br />colour: Observado","datas: 2020-08-01<br />Observado:  93140835<br />colour: Observado","datas: 2020-09-01<br />Observado:  89509711<br />colour: Observado","datas: 2020-10-01<br />Observado:  97352685<br />colour: Observado","datas: 2020-11-01<br />Observado:  88747765<br />colour: Observado","datas: 2020-12-01<br />Observado:  88048978<br />colour: Observado"],"type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","name":"Observado","legendgroup":"Observado","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"y":[76114965.9912625,72408097.4071922,69094286.7051004,66280858.6755688,63755809.8113803,61451626.5324118,59318054.8443889,57321990.5900618,55439911.8538757,53654235.6027324,51951523.6843481,50321181.1410285],"text":["datas: 2020-01-01<br />Prev.Lower: 76114966<br />colour: Mínimo","datas: 2020-02-01<br />Prev.Lower: 72408097<br />colour: Mínimo","datas: 2020-03-01<br />Prev.Lower: 69094287<br />colour: Mínimo","datas: 2020-04-01<br />Prev.Lower: 66280859<br />colour: Mínimo","datas: 2020-05-01<br />Prev.Lower: 63755810<br />colour: Mínimo","datas: 2020-06-01<br />Prev.Lower: 61451627<br />colour: Mínimo","datas: 2020-07-01<br />Prev.Lower: 59318055<br />colour: Mínimo","datas: 2020-08-01<br />Prev.Lower: 57321991<br />colour: Mínimo","datas: 2020-09-01<br />Prev.Lower: 55439912<br />colour: Mínimo","datas: 2020-10-01<br />Prev.Lower: 53654236<br />colour: Mínimo","datas: 2020-11-01<br />Prev.Lower: 51951524<br />colour: Mínimo","datas: 2020-12-01<br />Prev.Lower: 50321181<br />colour: Mínimo"],"type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(255,0,0,1)","dash":"dash"},"hoveron":"points","name":"Mínimo","legendgroup":"Mínimo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"y":[90633256.1544772,90264133.5941629,90368965.3022737,90339192.8412893,90347648.2928796,90345246.9239893,90345928.9186156,90345735.230477,90345790.2383812,90345774.6160021,90345779.0527959,90345777.7927356],"text":["datas: 2020-01-01<br />Prev.Mean: 90633256<br />colour: Médio","datas: 2020-02-01<br />Prev.Mean: 90264134<br />colour: Médio","datas: 2020-03-01<br />Prev.Mean: 90368965<br />colour: Médio","datas: 2020-04-01<br />Prev.Mean: 90339193<br />colour: Médio","datas: 2020-05-01<br />Prev.Mean: 90347648<br />colour: Médio","datas: 2020-06-01<br />Prev.Mean: 90345247<br />colour: Médio","datas: 2020-07-01<br />Prev.Mean: 90345929<br />colour: Médio","datas: 2020-08-01<br />Prev.Mean: 90345735<br />colour: Médio","datas: 2020-09-01<br />Prev.Mean: 90345790<br />colour: Médio","datas: 2020-10-01<br />Prev.Mean: 90345775<br />colour: Médio","datas: 2020-11-01<br />Prev.Mean: 90345779<br />colour: Médio","datas: 2020-12-01<br />Prev.Mean: 90345778<br />colour: Médio"],"type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(0,0,255,1)","dash":"dot"},"hoveron":"points","name":"Médio","legendgroup":"Médio","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"y":[105151546.317692,108120169.781134,111643643.899447,114397527.00701,116939486.774379,119238867.315567,121373802.992842,123369479.870892,125251668.622887,127037313.629272,128740034.421244,130370374.444443],"text":["datas: 2020-01-01<br />Prev.Upper: 105151546<br />colour: Máximo","datas: 2020-02-01<br />Prev.Upper: 108120170<br />colour: Máximo","datas: 2020-03-01<br />Prev.Upper: 111643644<br />colour: Máximo","datas: 2020-04-01<br />Prev.Upper: 114397527<br />colour: Máximo","datas: 2020-05-01<br />Prev.Upper: 116939487<br />colour: Máximo","datas: 2020-06-01<br />Prev.Upper: 119238867<br />colour: Máximo","datas: 2020-07-01<br />Prev.Upper: 121373803<br />colour: Máximo","datas: 2020-08-01<br />Prev.Upper: 123369480<br />colour: Máximo","datas: 2020-09-01<br />Prev.Upper: 125251669<br />colour: Máximo","datas: 2020-10-01<br />Prev.Upper: 127037314<br />colour: Máximo","datas: 2020-11-01<br />Prev.Upper: 128740034<br />colour: Máximo","datas: 2020-12-01<br />Prev.Upper: 130370374<br />colour: Máximo"],"type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(0,100,0,1)","dash":"dashdot"},"hoveron":"points","name":"Máximo","legendgroup":"Máximo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":66.4840182648402},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Hospitalar: Observado x Previsto (95% de confiança)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[18245.25,18613.75],"tickmode":"array","ticktext":["jan/2020","fev/2020","mar/2020","abr/2020","mai/2020","jun/2020","jul/2020","ago/2020","set/2020","out/2020","nov/2020","dez/2020"],"tickvals":[18262,18293,18322,18353,18383,18414,18444,18475,18506,18536,18567,18597],"categoryorder":"array","categoryarray":["jan/2020","fev/2020","mar/2020","abr/2020","mai/2020","jun/2020","jul/2020","ago/2020","set/2020","out/2020","nov/2020","dez/2020"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-60,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Meses","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[46318721.4758578,134372834.109613],"tickmode":"array","ticktext":["6.0e+07","8.0e+07","1.0e+08","1.2e+08"],"tickvals":[60000000,80000000,100000000,120000000],"categoryorder":"array","categoryarray":["6.0e+07","8.0e+07","1.0e+08","1.2e+08"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Valores","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Legenda","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"55c47f7be2fd":{"x":{},"y":{},"colour":{},"type":"scatter"},"55c464386b06":{"x":{},"y":{},"colour":{}},"55c447bb3a19":{"x":{},"y":{},"colour":{}},"55c46c963df4":{"x":{},"y":{},"colour":{}}},"cur_data":"55c47f7be2fd","visdat":{"55c47f7be2fd":["function (y) ","x"],"55c464386b06":["function (y) ","x"],"55c447bb3a19":["function (y) ","x"],"55c46c963df4":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

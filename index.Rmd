@@ -1,0 +1,23 @@
+---
+output: html_document
+---
+
+- ## __O que são Séries Temporais?__
+
+Uma série temporal é o conjunto de observações dispotas e ordenadas no tempo, ou seja, dados que tenham suas observações registradas em sequência equidistante no tempo, podendo ser em décadas, quinquênios, anos, timestres, meses, dias, horas, minutos, segundos, etc.
+
+Para ficar mais claro, o registro diário de atendimento em um call center, registro de umidade do ar a cada hora, número de acidentes por dia e receita (ou despesa) diária de uma empresa são exemplos de dados registrados em sequência no tempo. O estudo de séries temporais procura analisar algumas características que os registros possam mostrar, como tendência e sazonalidade.
+
+- ## __Tendência__
+
+A tendência de uma série demonstra "para onde" os dados estão indo. Por exemplo, uma dada empresa percebe que em um determinado ano sua receita aumentou em 1 unidade monetária por dia. Se for feito uma análise dessa série temporal o analista irá perceber que a tendência da receita é positiva. Como a receita aumentou 1 unidade monetária ao dia, então podemos dizer que a receita apresentou uma tendência (ou crescimento) positiva e linear. Decompondo uma série temporal fica mais evidente a observação e interpretação da tendência, podendo ser positiva ou negativa, sendo linear, geométrica, exponencial, inversa, logarítmica, etc.
+
+- ## __Sazonalidade__
+
+Saber se uma série temporal apresenta sazonalidade é importante, seja para o mercado ou para políticas públicas. Por exemplo, algumas indústrias podem apresentar maior receita e oferta de emprego em épocas festivas, como carnaval, páscoa, dia das mães, dia dos pais, São João, natal, reveillon, etc. A observação do crescimento de receita e oferta de emprego nesses períodos irá apresentar sazonalidade na hora da decomposição da série. A aplicação da sazonalidade em políticas públicas pode ser verificada no crescimento de uma determinada doença em certos períodos do ano, como gripe e febre amarela, ou então na observação de períodos de enchentes em determinadas regiões ocasionadas por chuvas em determinadas épocas. Analisar a sazonalidade de uma determinada série temporal pode ajudar na tomada de decisões, seja para fins econômicos ou para fins públicos.
+
+- ## __O que será abordado aqui?__
+
+Para exemplificar a utilização de séries temporais para fins econômicos e públicos, será feito uma análise utilizando os dados de despesa ambulatorial e hospitalar, disponíveis no Plano de Dados Abertos (PDA) da Agência Nacional de Saúde Suplementar (ANS), para o estado brasileiro do Ceará, no período de 2015 a 2020. Onde será observado a influência da pandemia da COVID-19 e o comunicado da ANS sobre a suspensão do atendimento presencial, feito pela Nota Técnica nº 06/2020/DIRAD-DIFIS/DIFIS, disponível em: https://www.ans.gov.br/images/stories/noticias/pdf/covid_19/nota-tecnica-6-dirad-difis.pdf e em https://www.gov.br/ans/pt-br/arquivos/assuntos/coronavirus-covid-19/notas-tecnicas_covid-19/comunicado06_coronavirus.pdf.
+
+A fim de demonstrar as técnicas de séries temporais, será explicado as funções utilizadas, tanto no campo matemático quanto de interpretação do resultado, o intuito é apresentar como a análise é vantajosa e, mesmo sem ter tanto conhecimento matemático o pesquisador pode utilizar a ferramenta para análisar dados dispostos no tempo. A linguagem utilizada para os resultados será o R.

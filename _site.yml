@@ -1,0 +1,13 @@
+name: "time-series"
+output_dir: "."
+navbar:
+  title: "Séries Temporais na Saúde Suplementar"
+  left:
+    - text: "Início"
+      href: index.html
+    - text: "Despesas "
+      href: desp.html
+output: 
+  html_document:
+    theme: cerulean
+    css: "style.css"
