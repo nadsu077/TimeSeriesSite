@@ -399,7 +399,9 @@ https://www.machinelearningplus.com/time-series/kpss-test-for-stationarity/
 
 https://www.statology.org/kpss-test-in-r/
 
-### - __KPSS: H0: O processo é estacionário | H1: A série é não estacionária__
+### - __KPSS:__
+
+__H0: O processo é estacionário | H1: A série é não estacionária__
 
 #### __Série Ambulatorial__
 
@@ -439,7 +441,9 @@ hosp1.ts %>% tseries::kpss.test()
 
 Utilizando a função *ur.kpss* do pacote *urca* foi observado o valor de 1.3319 para a estatística do teste para a série sem 2020, valor que está fora dos limites dos valores críticos, primeiro sinal de rejeição da hipótese nula. Com a função *kpss.test* do pacote *tseries* pode ser observado o p-valor do teste, sendo este de 0.01, menor que a significância de 0.05 dando indícios para a rejeição da hipótese nula em favor da alternativa, sendo então possível dizer que a série apresenta não estacionariedade.
 
-### - __ADF - H0: A série é não estacionária | H1: O processo é estacionário__
+### - __ADF:__ 
+
+__H0: A série é não estacionária | H1: O processo é estacionário__
 
 #### __Série Ambulatorial__
 
@@ -486,7 +490,9 @@ Resultado foi de 1 diferença para as séries ambulatoriais com e sem 2020. Mesm
 
 ## __Retornando para os testes:__
 
-### - __KPSS: H0: O processo é estacionário | H1: A série é não estacionária__
+### - __KPSS:__
+
+__H0: O processo é estacionário | H1: A série é não estacionária__
 
 #### __Série Ambulatorial__
 
@@ -516,7 +522,9 @@ hosp1.ts %>% diff() %>% tseries::kpss.test()
 
 Pelo teste KPSS, para a série com 2020, o resultado da estatística foi de 0.0742, valor abaixo dos valores críticos, primeiro indício para a não rejeição da hipótese nula. O com p-valor igual a 0.1, superior a 0.05. Dessa forma, opta-se por não rejeitar a hipótese nula de que a série hospitalar com 2020, tomada uma diferença, é estacionária. Para a série sem 2020 foi obtido o valor de estatística igual a 0.0752, abaixo dos valores críticos, com p-valor igual a 0.1. Com esses resultados opta-se por não rejeitar a hipótese nula de que a série hospitalar sem 2020 tomada uma diferência é estacionária.
 
-### - __ADF - H0: A série é não estacionária | H1: O processo é estacionário__
+### - __ADF:__
+
+__H0: A série é não estacionária | H1: O processo é estacionário__
 
 #### __Série Ambulatorial__
 
@@ -528,7 +536,7 @@ amb.ts %>% diff() %>% tseries::adf.test()
 amb1.ts %>% diff() %>% tseries::adf.test()
 ```
 
-# Pelo teste ADF, para a série ambulatorial com 2020, o resultado da estatística foi de -4.9262 com p-valor de 0.01, sendo inferior ao nível de significância de 0.05, sendo então cabível a rejeição da hipótese nula e a não rejeição da hipótese alternativa, onde diz que a série ambulatorial com 2020, tomada uma diferença, é estacionária. Para a série sem 2020 foi obtido o valor de estatística igual a -4.0129 com p-valor de 0.01522, inferior a significância de 0.05, optando então pela rejeição da hipótese nula e a não rejeição da hipótese alternativa, sendo então a série ambulatorial sem 2020, tomada uma diferença, estacionária.
+Pelo teste ADF, para a série ambulatorial com 2020, o resultado da estatística foi de -4.9262 com p-valor de 0.01, sendo inferior ao nível de significância de 0.05, sendo então cabível a rejeição da hipótese nula e a não rejeição da hipótese alternativa, onde diz que a série ambulatorial com 2020, tomada uma diferença, é estacionária. Para a série sem 2020 foi obtido o valor de estatística igual a -4.0129 com p-valor de 0.01522, inferior a significância de 0.05, optando então pela rejeição da hipótese nula e a não rejeição da hipótese alternativa, sendo então a série ambulatorial sem 2020, tomada uma diferença, estacionária.
 
 #### Analisando graficamente as séries com 1 diferença
 
